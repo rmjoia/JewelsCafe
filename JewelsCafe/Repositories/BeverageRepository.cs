@@ -1,17 +1,21 @@
 ﻿using System;
 using JewelsCafe.Models;
+using Microsoft.Extensions.Logging;
 
 namespace JewelsCafe.Repositories
 {
     public class BeverageRepository : IRepository<Beverege>
     {
+        private readonly string error = "An exception ocurred while {0} a Beverege: {1}";
+        private readonly ILogger<BeverageRepository> _logger;
         private List<Beverege> _repo;
 
-        public BeverageRepository()
+        public BeverageRepository(ILogger<BeverageRepository> logger)
         {
             _repo = new();
+            _logger = logger;
         }
-
+        
         public Beverege Add(Beverege item)
         {
             try
@@ -20,6 +24,8 @@ namespace JewelsCafe.Repositories
             }
             catch (Exception ex)
             {
+                _logger.LogError(error, "Adding", ex.Message);
+                
                 throw;
             }
 
@@ -34,6 +40,7 @@ namespace JewelsCafe.Repositories
             }
             catch (Exception ex)
             {
+                _logger.LogError(error, "Adding", ex.Message);
                 throw;
             }
 
@@ -54,6 +61,7 @@ namespace JewelsCafe.Repositories
             }
             catch (Exception ex)
             {
+                _logger.LogError(error, "Removing", ex.Message);
                 throw;
             }
         }
@@ -78,6 +86,7 @@ namespace JewelsCafe.Repositories
             }
             catch (Exception ex)
             {
+                _logger.LogError(error, "Getting By Id", ex.Message);
                 throw;
             }
         }

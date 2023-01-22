@@ -7,6 +7,8 @@ namespace JewelsCafe.Models
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public BeveregeType Type { get; set; }
 
         public bool IsSignature { get; set; }
