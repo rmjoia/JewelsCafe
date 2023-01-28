@@ -4,19 +4,19 @@ using Microsoft.Extensions.Logging;
 
 namespace JewelsCafe.Repositories
 {
-    public class BeverageRepository : IRepository<Beverege>
+    public class GenericRepository<T> : IRepository<IFood> where T : IFood
     {
-        private readonly string error = "An exception ocurred while {0} a Beverege: {1}";
-        private readonly ILogger<BeverageRepository> _logger;
-        private List<Beverege> _repo;
+        private readonly string error = $"An exception ocurred while {0} a {nameof(T)}: {1}";
+        private readonly ILogger<T> _logger;
+        private List<IFood> _repo;
 
-        public BeverageRepository(ILogger<BeverageRepository> logger)
+        public GenericRepository(ILogger<T> logger)
         {
             _repo = new();
             _logger = logger;
         }
         
-        public Beverege Add(Beverege item)
+        public IFood Add(IFood item)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace JewelsCafe.Repositories
             return item;
         }
 
-        public IEnumerable<Beverege> Add(List<Beverege> items)
+        public IEnumerable<IFood> Add(List<IFood> items)
         {
             try
             {
@@ -66,12 +66,12 @@ namespace JewelsCafe.Repositories
             }
         }
 
-        public IEnumerable<Beverege> GetAll()
+        public IEnumerable<IFood> GetAll()
         {
             return _repo.Select(b => b);
         }
 
-        public Beverege GetById(Guid id)
+        public IFood GetById(Guid id)
         {
             var item = _repo.FirstOrDefault(b => b.Id == id);
 
@@ -91,12 +91,12 @@ namespace JewelsCafe.Repositories
             }
         }
 
-        public IEnumerable<Beverege> GetByIds(List<Guid> ids)
+        public IEnumerable<IFood> GetByIds(List<Guid> ids)
         {
             throw new NotImplementedException();
         }
 
-        public Beverege Update(Beverege item)
+        public IFood Update(IFood item)
         {
             throw new NotImplementedException();
         }

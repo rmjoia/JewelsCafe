@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace JewelsCafe.Models
 {
-    public class Beverege : IFood
+    internal class Food : IFood
     {
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+        
+        public BestServeType Type { get; set; }
 
         public string Description { get; set; }
-
-        public BestServeType Type { get; set; }
 
         public bool IsSignature { get; set; }
 

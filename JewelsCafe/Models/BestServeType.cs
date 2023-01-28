@@ -1,7 +1,7 @@
 ﻿using System;
 namespace JewelsCafe.Models
 {
-	public enum BeveregeType
+	public enum BestServeType
 	{
 		Hot = 0,
 		Cold = 1
