@@ -88,41 +88,40 @@ namespace JewelsCafe.ViewModels
             {
                 IsLoading = false;
             }
+        }
 
-#pragma warning disable CS8321 // Local function is declared but never used (used in xaml)
-            [RelayCommand]
-            async Task AddToCartAsync()
+        [RelayCommand]
+        private async Task AddToCartAsync(Guid foodId)
+        {
+            _logger.LogDebug($"Here");
+
+            try
             {
-                _logger.LogDebug($"Here");
-
-                try
-                {
-
-                }
-                catch (Exception)
-                {
-                    await Shell.Current.DisplayAlert("error", "error", "ok");
-                    throw;
-                }
 
             }
-            // Local function is declared but never used disabled above used in xaml
-            [RelayCommand]
-            async Task RemoveFromCartAsync()
+            catch (Exception)
             {
-                _logger.LogDebug($"Here");
+                await Shell.Current.DisplayAlert("error", "error", "ok");
+                throw;
+            }
 
-                try
-                {
+        }
 
-                }
-                catch (Exception)
-                {
-                    await Shell.Current.DisplayAlert("error", "error", "ok");
-                    throw;
-                }
+        [RelayCommand]
+        private async Task RemoveFromCartAsync(Guid foodId)
+        {
+            _logger.LogDebug($"Here");
+
+            try
+            {
 
             }
+            catch (Exception)
+            {
+                await Shell.Current.DisplayAlert("error", "error", "ok");
+                throw;
+            }
+
         }
     }
 }

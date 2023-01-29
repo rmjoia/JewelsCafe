@@ -7,25 +7,44 @@
              x:DataType="viewmodel:CoffeeListViewModel"
              Title="{Binding Title}">
 
-    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*, Auto" x:DataType="viewmodel:CoffeeListViewModel">
-        <CollectionView Grid.ColumnSpan="2" ItemsSource="{Binding CoffeeList}" SelectionMode="Single">
+
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="100, *, Auto" >
+
+        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="50,30,0,0">
+            <HorizontalStackLayout>
+                <Label Text="Cart: " VerticalTextAlignment="Center" FontSize="Header" />
+                <Label Text="€ 0,00" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout >
+                <Label Text="Items in Cart: " VerticalTextAlignment="Center"  HorizontalTextAlignment="End" FontSize="Header" />
+                <Label Text="0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding CoffeeList}" SelectionMode="Single">
 
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="model:Food" >
                     <Frame HeightRequest="90">
                         <Grid ColumnDefinitions="60,180,40,60" >
-                            <!-- x:DataType="model:Food" -->
                             <Image Grid.Column="0" Source="dotnet_bot.png" Aspect="AspectFit" />
                             <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="5">
-                                <!-- <Label LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Header" /> -->
+                                <Label LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Header" />
                             </VerticalStackLayout>
                             <HorizontalStackLayout Grid.Column="2">
-                                <Button BackgroundColor="Green" Margin="5"
-                                        Command="{Binding AddToCartCommand}" 
-                                        Text="+" />
-                                <Button BackgroundColor="Red" Margin="5" 
-                                        Command="{Binding RemoveFromCart}" 
-                                        Text="-" />
+                                <Button BackgroundColor="Green" Margin="0,0,0,5"
+                                        IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CoffeeListViewModel}}, Path=IsDoneLoading}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CoffeeListViewModel}}, Path=AddToCartCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        Text="+"
+                                        FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="3">
+                                <Button BackgroundColor="Red" Margin="10,0,0,5" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CoffeeListViewModel}}, Path=RemoveFromCartCommand}" 
+                                        CommandParameter="{Binding Id}"
+                                        Text="-"
+                                        FontAttributes="Bold"/>
                             </HorizontalStackLayout>
                         </Grid>
                     </Frame>
