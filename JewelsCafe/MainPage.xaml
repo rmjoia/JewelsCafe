@@ -7,7 +7,6 @@
              x:DataType="viewmodel:CoffeeListViewModel"
              Title="{Binding Title}">
 
-
     <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="100, *, Auto" >
 
         <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="50,30,0,0">
@@ -27,7 +26,7 @@
                 <DataTemplate x:DataType="model:Food" >
                     <Frame HeightRequest="90">
                         <Grid ColumnDefinitions="60,180,40,60" >
-                            <Image Grid.Column="0" Source="dotnet_bot.png" Aspect="AspectFit" />
+                            <Image Grid.Column="0" Source="coffee.png" Aspect="AspectFit" />
                             <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="5">
                                 <Label LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Header" />
                             </VerticalStackLayout>

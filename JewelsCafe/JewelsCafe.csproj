@@ -15,7 +15,7 @@
 		<ApplicationTitle>JewelsCafe</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.jewelscafe</ApplicationId>
+		<ApplicationId>eu.rmjoia.jewelscafe</ApplicationId>
 		<ApplicationIdGuid>ff87db50-ea99-4a30-8c85-5f7370f11469</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -67,7 +67,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#99582a" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
