@@ -1,6 +1,7 @@
 ﻿using JewelsCafe.Models;
 using JewelsCafe.Repositories;
 using JewelsCafe.Services;
+using JewelsCafe.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace JewelsCafe;
@@ -18,10 +19,20 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		// Dependency Injection
-		builder.Services.AddSingleton<GenericRepository<Beverege>>();
+        // Dependency Injection
+
+        //	Views
+        builder.Services.AddScoped<MainPage>();
+
+		//	ViewModels
+		builder.Services.AddScoped<CoffeeListViewModel>();
+		
+		//	Repositories
+		builder.Services.AddSingleton<GenericRepository<Beverage>>();
         builder.Services.AddSingleton<GenericRepository<Food>>();
-        builder.Services.AddTransient<MenuService>();
+		
+		//	Services
+        builder.Services.AddScoped<MenuService>();
 		
 
 #if DEBUG

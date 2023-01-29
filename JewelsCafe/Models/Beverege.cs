@@ -1,15 +1,17 @@
 ﻿using System;
 namespace JewelsCafe.Models
 {
-    public class Beverege : IFood
+    public class Beverage : IFood
     {
         public Guid Id { get; set; }
-
+        
         public string Name { get; set; }
 
         public string Description { get; set; }
 
-        public BestServeType Type { get; set; }
+        public BestServeType BestServed { get; set; }
+
+        public FoodFamily Family { get; set; }
 
         public bool IsSignature { get; set; }
 

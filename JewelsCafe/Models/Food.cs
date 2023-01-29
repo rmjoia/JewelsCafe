@@ -12,7 +12,9 @@ namespace JewelsCafe.Models
 
         public string Name { get; set; }
         
-        public BestServeType Type { get; set; }
+        public BestServeType BestServed { get; set; }
+
+        public FoodFamily Family { get; set; }
 
         public string Description { get; set; }
 
