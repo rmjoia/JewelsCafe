@@ -30,10 +30,12 @@ public static class MauiProgram
 		//	Repositories
 		builder.Services.AddSingleton<GenericRepository<Beverage>>();
         builder.Services.AddSingleton<GenericRepository<Food>>();
-		
-		//	Services
+        builder.Services.AddSingleton<GenericRepository<IFood>>();
+
+        //	Services
         builder.Services.AddScoped<MenuService>();
-		
+        builder.Services.AddScoped<OrderService>();
+
 
 #if DEBUG
         builder.Logging.AddDebug();

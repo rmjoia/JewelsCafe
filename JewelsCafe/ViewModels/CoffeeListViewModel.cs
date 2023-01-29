@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using JewelsCafe.Models;
 using JewelsCafe.Repositories;
+using JewelsCafe.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 
@@ -10,13 +11,15 @@ namespace JewelsCafe.ViewModels
     public partial class CoffeeListViewModel : ViewModelBase
     {
         private readonly GenericRepository<Beverage> _coffeeRepository;
-        private ILogger<CoffeeListViewModel> _logger;
+        private readonly OrderService _orderService;
+        private readonly ILogger<CoffeeListViewModel> _logger;
 
-        public CoffeeListViewModel(GenericRepository<Beverage> genericRepository, ILogger<CoffeeListViewModel> logger)
+        public CoffeeListViewModel(ILogger<CoffeeListViewModel> logger, GenericRepository<Beverage> genericRepository, OrderService orderService)
         {
             Title = "Try our Selected Blends...";
-            _coffeeRepository = genericRepository;
             _logger = logger;
+            _coffeeRepository = genericRepository;
+            _orderService = orderService;
 
             InitializeBeverageRepository();
             GetCoffeeList();
@@ -82,7 +85,6 @@ namespace JewelsCafe.ViewModels
             catch (Exception ex)
             {
                 _logger.LogError("an error has occurred while getting the coffee list!", ex.Message);
-                //await Shell.Current.DisplayAlert("Error", "Something bad happened while getting the coffee list!", "OK");
             }
             finally
             {
@@ -93,33 +95,30 @@ namespace JewelsCafe.ViewModels
         [RelayCommand]
         private async Task AddToCartAsync(Guid foodId)
         {
-            _logger.LogDebug($"Here");
-
             try
             {
-
+                _orderService.AddToOrder(foodId);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("error", "error", "ok");
-                throw;
+                _logger.LogError("Error while adding to order", ex.Message);
+                await Shell.Current.DisplayAlert("Error", "An error has occurred while adding your order!", "Ok");
             }
-
         }
 
         [RelayCommand]
         private async Task RemoveFromCartAsync(Guid foodId)
         {
-            _logger.LogDebug($"Here");
+            _orderService.AddToOrder(foodId);
 
             try
             {
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("error", "error", "ok");
-                throw;
+                _logger.LogError("Error while updating your order", ex.Message);
+                await Shell.Current.DisplayAlert("Error", "An error has occurred while updating your order!", "Ok");
             }
 
         }

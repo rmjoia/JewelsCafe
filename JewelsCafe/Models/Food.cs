@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JewelsCafe.Models
 {
-    internal class Food : IFood
+    public class Food : IFood
     {
         public Guid Id { get; set; }
 
