@@ -12,5 +12,8 @@
         IEnumerable<string> Options { get; set; }
         BestServeType BestServed { get; set; }
         FoodFamily Family { get; set; }
+        decimal Price { get; set; }
+        decimal Discount { get; set; }
+        decimal Vat { get; set; }
     }
 }

@@ -35,6 +35,7 @@ public static class MauiProgram
         //	Services
         builder.Services.AddScoped<MenuService>();
         builder.Services.AddScoped<OrderService>();
+        builder.Services.AddScoped<CheckoutService>();
 
 
 #if DEBUG

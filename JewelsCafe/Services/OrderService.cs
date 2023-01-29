@@ -1,4 +1,5 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
 using JewelsCafe.Models;
 using JewelsCafe.Repositories;
 using Microsoft.Extensions.Logging;
@@ -26,7 +27,7 @@ namespace JewelsCafe.Services
             _foodRepository = foodRepository;
 
         }
-
+        
         public bool AddToOrder(Guid foodId)
         {
             bool operation = false;
@@ -34,9 +35,28 @@ namespace JewelsCafe.Services
             {
                 var food = GetFoodItem(foodId);
 
+                // Has to be implemented as as stack, so we don't remove all items with the same id and we keep the order
                 _orderRepository.Add(food);
 
                 operation = food != null;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(error, nameof(AddToOrder), ex.Message);
+            }
+
+            return operation;
+        }
+
+        public bool RemoveFromOrder(Guid foodId)
+        {
+            bool operation = false;
+            try
+            {
+                // Has to be implemented as as stack, so we don't remove all items with the same id and we keep the order
+                _orderRepository.Delete(foodId);
+
+                operation = true;
             }
             catch (Exception ex)
             {

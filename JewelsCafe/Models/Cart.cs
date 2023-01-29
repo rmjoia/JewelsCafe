@@ -8,7 +8,8 @@ namespace JewelsCafe.Models
 {
     internal class Cart
     {
-        public List<IFood> Items { get; set; } = new();
+        public List<CartItem> Items { get; set; }
+        public decimal VatTotal { get; set; }
         public decimal Total { get; set; }
     }
 }

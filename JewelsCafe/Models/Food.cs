@@ -30,5 +30,11 @@ namespace JewelsCafe.Models
         public bool IsOptionAvailable { get; set; }
 
         public IEnumerable<string> Options { get; set; }
+
+        public decimal Price { get; set; }
+
+        public decimal Discount { get; set; }
+
+        public decimal Vat { get; set; }
     }
 }

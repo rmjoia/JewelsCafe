@@ -13,13 +13,19 @@ namespace JewelsCafe.ViewModels
         private readonly GenericRepository<Beverage> _coffeeRepository;
         private readonly OrderService _orderService;
         private readonly ILogger<CoffeeListViewModel> _logger;
+        private readonly CheckoutService _checkoutService;
 
-        public CoffeeListViewModel(ILogger<CoffeeListViewModel> logger, GenericRepository<Beverage> genericRepository, OrderService orderService)
+        public CoffeeListViewModel(ILogger<CoffeeListViewModel> logger, 
+            GenericRepository<Beverage> genericRepository, 
+            OrderService orderService,
+            CheckoutService checkoutService
+            )
         {
             Title = "Try our Selected Blends...";
             _logger = logger;
             _coffeeRepository = genericRepository;
             _orderService = orderService;
+            _checkoutService = checkoutService;
 
             InitializeBeverageRepository();
             GetCoffeeList();
@@ -45,7 +51,8 @@ namespace JewelsCafe.ViewModels
                 IsSignature = false,
                 Options = new List<string>{"Diet","Zero","Cherry","No Caffeine"},
                 BestServed = BestServeType.Cold,
-                Family = FoodFamily.Soda
+                Family = FoodFamily.Soda,
+                Price = 2.50M,
             },
             new Beverage {
             Id = Guid.NewGuid(),
@@ -59,7 +66,8 @@ namespace JewelsCafe.ViewModels
             IsSignature = false,
             Options = new List<string> { "Milk", "Almond Milk", "Oat Milk", "Coconut Milk" },
             BestServed = BestServeType.Hot,
-            Family = FoodFamily.Coffee
+            Family = FoodFamily.Coffee,
+            Price = 2.50M
             }
         };
 
@@ -98,6 +106,8 @@ namespace JewelsCafe.ViewModels
             try
             {
                 _orderService.AddToOrder(foodId);
+                UpdateCart();
+
             }
             catch (Exception ex)
             {
@@ -109,11 +119,10 @@ namespace JewelsCafe.ViewModels
         [RelayCommand]
         private async Task RemoveFromCartAsync(Guid foodId)
         {
-            _orderService.AddToOrder(foodId);
-
             try
             {
-
+                _orderService.RemoveFromOrder(foodId);
+                UpdateCart();
             }
             catch (Exception ex)
             {
@@ -121,6 +130,27 @@ namespace JewelsCafe.ViewModels
                 await Shell.Current.DisplayAlert("Error", "An error has occurred while updating your order!", "Ok");
             }
 
+        }
+
+        protected void UpdateCart()
+        {
+            IsLoading = true;
+
+            try
+            {
+                var result = _checkoutService.Update();
+
+                CartCount = result.ToList().Count();
+                TotalAmount = result.Sum(items => items.Price);
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
     }
 }

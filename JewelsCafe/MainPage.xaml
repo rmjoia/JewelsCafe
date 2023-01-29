@@ -13,11 +13,11 @@
         <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="50,30,0,0">
             <HorizontalStackLayout>
                 <Label Text="Cart: " VerticalTextAlignment="Center" FontSize="Header" />
-                <Label Text="€ 0,00" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+                <Label Text="{ Binding TotalAmount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
             </HorizontalStackLayout>
             <HorizontalStackLayout >
                 <Label Text="Items in Cart: " VerticalTextAlignment="Center"  HorizontalTextAlignment="End" FontSize="Header" />
-                <Label Text="0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+                <Label Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
