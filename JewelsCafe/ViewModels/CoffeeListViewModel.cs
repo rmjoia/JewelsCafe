@@ -13,19 +13,17 @@ namespace JewelsCafe.ViewModels
         private readonly GenericRepository<Beverage> _coffeeRepository;
         private readonly OrderService _orderService;
         private readonly ILogger<CoffeeListViewModel> _logger;
-        private readonly CheckoutService _checkoutService;
 
         public CoffeeListViewModel(ILogger<CoffeeListViewModel> logger, 
             GenericRepository<Beverage> genericRepository, 
             OrderService orderService,
             CheckoutService checkoutService
-            )
+            ) : base(checkoutService)
         {
             Title = "Try our Selected Blends...";
             _logger = logger;
             _coffeeRepository = genericRepository;
             _orderService = orderService;
-            _checkoutService = checkoutService;
 
             InitializeBeverageRepository();
             GetCoffeeList();
@@ -128,27 +126,6 @@ namespace JewelsCafe.ViewModels
             {
                 _logger.LogError("Error while updating your order", ex.Message);
                 await Shell.Current.DisplayAlert("Error", "An error has occurred while updating your order!", "Ok");
-            }
-        }
-
-        protected void UpdateCart()
-        {
-            IsLoading = true;
-
-            try
-            {
-                var result = _checkoutService.Update();
-
-                CartCount = result.ToList().Count();
-                TotalAmount = result.Sum(items => items.Price);
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                IsLoading = false;
             }
         }
     }

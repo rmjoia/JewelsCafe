@@ -6,10 +6,20 @@
              xmlns:viewmodel="clr-namespace:JewelsCafe.ViewModels"
              x:DataType="viewmodel:SnacksViewModel"
              Title="{Binding Title}">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="100, *, Auto" >
+
+        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="50,30,0,0">
+            <HorizontalStackLayout>
+                <Label Text="Cart: " VerticalTextAlignment="Center" FontSize="Header" />
+                <Label Text="{ Binding TotalAmount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout >
+                <Label Text="Items in Cart: " VerticalTextAlignment="Center"  HorizontalTextAlignment="End" FontSize="Header" />
+                <Label Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+    </Grid>
+    
 </ContentPage>

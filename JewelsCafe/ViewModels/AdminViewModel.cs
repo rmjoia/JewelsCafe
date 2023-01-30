@@ -1,6 +1,12 @@
-﻿namespace JewelsCafe.ViewModels
+﻿using JewelsCafe.Services;
+
+namespace JewelsCafe.ViewModels
 {
-    public class AdminViewModel : ViewModelBase
+    public partial class AdminViewModel : ViewModelBase
     {
+        public AdminViewModel(CheckoutService checkoutService) : base(checkoutService)
+        {
+            Title = "Management & Credits";
+        }
     }
 }
