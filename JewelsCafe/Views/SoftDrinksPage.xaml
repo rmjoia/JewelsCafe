@@ -2,11 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JewelsCafe.Views.SoftDrinksPage"
-             Title="SoftDrinksPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:model="clr-namespace:JewelsCafe.Models"
+             xmlns:viewmodel="clr-namespace:JewelsCafe.ViewModels"
+             x:DataType="viewmodel:SoftDrinksViewModel"
+             Title="{Binding Title}">
+
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="100, *, Auto" >
+
+        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="50,30,0,0">
+            <HorizontalStackLayout>
+                <Label Text="Cart: " VerticalTextAlignment="Center" FontSize="Header" />
+                <Label Text="{ Binding TotalAmount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout >
+                <Label Text="Items in Cart: " VerticalTextAlignment="Center"  HorizontalTextAlignment="End" FontSize="Header" />
+                <Label Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+    </Grid>
+
 </ContentPage>

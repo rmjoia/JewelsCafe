@@ -129,7 +129,6 @@ namespace JewelsCafe.ViewModels
                 _logger.LogError("Error while updating your order", ex.Message);
                 await Shell.Current.DisplayAlert("Error", "An error has occurred while updating your order!", "Ok");
             }
-
         }
 
         protected void UpdateCart()

@@ -89,6 +89,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\AdminPage.xaml.cs">
+	    <DependentUpon>AdminPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\SnacksPage.xaml.cs">
+	    <DependentUpon>SnacksPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\AdminPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SnacksPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\SoftDrinksPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

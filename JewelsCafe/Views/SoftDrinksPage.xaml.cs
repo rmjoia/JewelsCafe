@@ -4,9 +4,9 @@ namespace JewelsCafe.Views;
 
 public partial class SoftDrinksPage : ContentPage
 {
-	public SoftDrinksPage()
+	public SoftDrinksPage(SoftDrinksViewModel softDrinksViewModel)
 	{
 		InitializeComponent();
-        BindingContext = new SoftDrinksViewModel();
+		BindingContext = softDrinksViewModel;
     }
 }

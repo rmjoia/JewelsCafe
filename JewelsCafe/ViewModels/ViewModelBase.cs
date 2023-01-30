@@ -1,7 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using JewelsCafe.Models;
-using JewelsCafe.Services;
-using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 
 namespace JewelsCafe.ViewModels
