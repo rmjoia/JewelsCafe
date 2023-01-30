@@ -36,5 +36,7 @@ namespace JewelsCafe.Models
         public decimal Discount { get; set; }
 
         public decimal Vat { get; set; }
+
+        public string Picture { get; set; }
     }
 }

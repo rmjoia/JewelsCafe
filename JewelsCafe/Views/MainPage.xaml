@@ -26,9 +26,10 @@
                 <DataTemplate x:DataType="model:Food" >
                     <Frame HeightRequest="90">
                         <Grid ColumnDefinitions="60,180,40,60" >
-                            <Image Grid.Column="0" Source="coffee.png" Aspect="AspectFit" />
+                            <Image Grid.Column="0" Source="{Binding Picture}" Aspect="AspectFit" />
                             <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="5">
                                 <Label LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Header" />
+                                <Label LineBreakMode="WordWrap" Text="{Binding Price}" FontSize="Header" />
                             </VerticalStackLayout>
                             <HorizontalStackLayout Grid.Column="2">
                                 <Button BackgroundColor="Green" Margin="0,0,0,5"

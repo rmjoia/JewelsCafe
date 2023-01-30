@@ -15,5 +15,6 @@
         decimal Price { get; set; }
         decimal Discount { get; set; }
         decimal Vat { get; set; }
+        public string Picture { get; set; }
     }
 }

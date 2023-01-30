@@ -42,7 +42,7 @@ namespace JewelsCafe.ViewModels
                 IsLoading = true;
                 _coffeeRepository
                     .GetAll()
-                    .Where(beverage => beverage.Family == FoodFamily.Coffee)
+                    .Where(beverage => beverage.Family == FoodFamily.Coffee || beverage.Family == FoodFamily.Tea)
                     .ToList()
                     .ForEach(coffee => CoffeeList.Add((coffee as Beverage)));
             }

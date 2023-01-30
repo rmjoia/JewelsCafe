@@ -39,6 +39,7 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Soda,
                 Price = 2.50M,
+                Picture = "coffee.png"
             },
             new Beverage {
                 Id =  Guid.NewGuid(),
@@ -54,6 +55,7 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Soda,
                 Price = 2.50M,
+                Picture = "coffee.png"
             },
             new Beverage {
                 Id =  Guid.NewGuid(),
@@ -68,6 +70,7 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Juice,
                 Price = 2.50M,
+                Picture = "coffee.png"
             }
         };
 
@@ -86,7 +89,8 @@ public partial class App : Application
                 Options = new List<string> { "Milk", "Almond Milk", "Oat Milk", "Coconut Milk" },
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Coffee,
-                Price = 2.50M
+                Price = 2.50M,
+                Picture = "coffee.png"
             },
             new Beverage {
                 Id = Guid.NewGuid(),
@@ -104,7 +108,8 @@ public partial class App : Application
                 Options = new List<string> { "Milk", "Almond Milk", "Oat Milk", "Coconut Milk" },
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Coffee,
-                Price = 5.00M
+                Price = 5.00M,
+                Picture = "coffee.png"
             },
             new Beverage {
                 Id = Guid.NewGuid(),
@@ -120,7 +125,8 @@ public partial class App : Application
                 Options = new List<string> { "Milk", "Almond Milk", "Oat Milk", "Coconut Milk" },
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Coffee,
-                Price = 5.00M
+                Price = 5.00M,
+                Picture = "coffee.png"
             },
         };
 
@@ -138,7 +144,8 @@ public partial class App : Application
                 Options = new List<string> { },
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Tea,
-                Price = 2.0M
+                Price = 2.0M,
+                Picture = "coffee.png"
             },
             new Beverage {
                 Id = Guid.NewGuid(),
@@ -152,7 +159,8 @@ public partial class App : Application
                 Options = new List<string> { },
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Tea,
-                Price = 2.0M
+                Price = 2.0M,
+                Picture = "chamomile_tea_icon.png"
             },
             new Beverage {
                 Id = Guid.NewGuid(),
@@ -166,7 +174,8 @@ public partial class App : Application
                 Options = new List<string> { "Milk", "Almond Milk", "Oat Milk", "Coconut Milk" },
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Tea,
-                Price = 2.0M
+                Price = 2.0M,
+                Picture = "coffee.png"
             },
         };
 
@@ -184,7 +193,8 @@ public partial class App : Application
                 Options = new List<string> { "Peanut", "Salt", "Peanut Butter" },
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Chocolate,
-                Price = 2.0M
+                Price = 2.0M,
+                Picture = "coffee.png"
             },
             new Beverage {
                 Id = Guid.NewGuid(),
@@ -199,7 +209,8 @@ public partial class App : Application
                 Options = new List<string> { },
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Chocolate,
-                Price = 2.0M
+                Price = 2.0M,
+                Picture = "coffee.png"
             },
             new Beverage {
                 Id = Guid.NewGuid(),
@@ -215,7 +226,8 @@ public partial class App : Application
                 Options = new List<string> { },
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Chocolate,
-                Price = 2.0M
+                Price = 2.0M,
+                Picture = "coffee.png"
             },
             new Beverage {
                 Id = Guid.NewGuid(),
@@ -230,7 +242,8 @@ public partial class App : Application
                 Options = new List<string> { },
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Chocolate,
-                Price = 2.0M
+                Price = 2.0M,
+                Picture = "coffee.png"
             },
         };
 
