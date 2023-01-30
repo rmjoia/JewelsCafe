@@ -18,32 +18,11 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-            });
-
-        // Dependency Injection
-
-        //	Views
-        builder.Services.AddScoped<MainPage>();
-        builder.Services.AddScoped<SoftDrinksPage>();
-        builder.Services.AddScoped<SnacksPage>();
-        builder.Services.AddScoped<AdminPage>();
-
-        //	ViewModels
-        builder.Services.AddScoped<CoffeeListViewModel>();
-        builder.Services.AddScoped<SoftDrinksViewModel>();
-        builder.Services.AddScoped<SnacksViewModel>();
-        builder.Services.AddScoped<AdminViewModel>();
-
-        //	Repositories
-        builder.Services.AddSingleton<GenericRepository<Beverage>>();
-        builder.Services.AddSingleton<GenericRepository<Food>>();
-        builder.Services.AddSingleton<GenericRepository<IFood>>();
-
-        //	Services
-        builder.Services.AddScoped<MenuService>();
-        builder.Services.AddScoped<OrderService>();
-        builder.Services.AddScoped<CheckoutService>();
-
+            })
+            .RegisterViews()
+            .RegisterViewModels()
+            .RegisterServices()
+            .RegisterRepositories();
 
 #if DEBUG
         builder.Logging.AddDebug();
@@ -51,5 +30,42 @@ public static class MauiProgram
 
 		return builder.Build();
 	}
+    public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
+    {
+        builder.Services.AddScoped<MainPage>();
+        builder.Services.AddScoped<SoftDrinksPage>();
+        builder.Services.AddScoped<SnacksPage>();
+        builder.Services.AddScoped<AdminPage>();
+        
+        return builder;
+    }
+
+    private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
+    {
+        builder.Services.AddScoped<CoffeeListViewModel>();
+        builder.Services.AddScoped<SoftDrinksViewModel>();
+        builder.Services.AddScoped<SnacksViewModel>();
+        builder.Services.AddScoped<AdminViewModel>();
+        
+        return builder;
+    }
+
+    private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
+    {
+        builder.Services.AddScoped<MenuService>();
+        builder.Services.AddScoped<OrderService>();
+        builder.Services.AddScoped<CheckoutService>();
+
+        return builder;
+    }
+
+    private static MauiAppBuilder RegisterRepositories(this MauiAppBuilder builder)
+    {
+        builder.Services.AddSingleton<GenericRepository<Beverage>>();
+        builder.Services.AddSingleton<GenericRepository<Food>>();
+        builder.Services.AddSingleton<GenericRepository<IFood>>();
+
+        return builder;
+    }
 }
 
