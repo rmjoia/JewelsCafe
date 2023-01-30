@@ -2,6 +2,7 @@
 using JewelsCafe.Repositories;
 using JewelsCafe.Services;
 using JewelsCafe.ViewModels;
+using JewelsCafe.Views;
 using Microsoft.Extensions.Logging;
 
 namespace JewelsCafe;
@@ -23,12 +24,14 @@ public static class MauiProgram
 
         //	Views
         builder.Services.AddScoped<MainPage>();
+        builder.Services.AddScoped<SoftDrinksPage>();
 
-		//	ViewModels
-		builder.Services.AddScoped<CoffeeListViewModel>();
-		
-		//	Repositories
-		builder.Services.AddSingleton<GenericRepository<Beverage>>();
+        //	ViewModels
+        builder.Services.AddScoped<CoffeeListViewModel>();
+        builder.Services.AddScoped<SoftDrinksViewModel>();
+
+        //	Repositories
+        builder.Services.AddSingleton<GenericRepository<Beverage>>();
         builder.Services.AddSingleton<GenericRepository<Food>>();
         builder.Services.AddSingleton<GenericRepository<IFood>>();
 

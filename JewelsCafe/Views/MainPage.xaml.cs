@@ -1,6 +1,6 @@
 ﻿using JewelsCafe.ViewModels;
 
-namespace JewelsCafe;
+namespace JewelsCafe.Views;
 
 public partial class MainPage : ContentPage
 {
