@@ -25,52 +25,10 @@ namespace JewelsCafe.ViewModels
             _coffeeRepository = genericRepository;
             _orderService = orderService;
 
-            InitializeBeverageRepository();
             GetCoffeeList();
         }
 
         public ObservableCollection<Beverage> CoffeeList { get; private set; }
-
-
-        private void InitializeBeverageRepository()
-        {
-            var beverages = new List<IFood>
-        {
-            new Beverage {
-                Id =  Guid.NewGuid(),
-                Name = "Coca Cola",
-                Description = "Tastes Funny",
-                Ingredients = new List<Ingredient> {
-                    new Ingredient { Id = Guid.NewGuid(), Name = "Sugar", IsAlergen = true },
-                    new Ingredient { Id = Guid.NewGuid(), Name = "Caramel", IsAlergen = false },
-                    new Ingredient { Id = Guid.NewGuid(), Name = "Secret mixture", IsAlergen = false }
-                },
-                IsOptionAvailable= true,
-                IsSignature = false,
-                Options = new List<string>{"Diet","Zero","Cherry","No Caffeine"},
-                BestServed = BestServeType.Cold,
-                Family = FoodFamily.Soda,
-                Price = 2.50M,
-            },
-            new Beverage {
-            Id = Guid.NewGuid(),
-            Name = "Jewel's Roast Coffee",
-            Description = "Dark custom blend of arabian selected coffee and a mixture of spices",
-            Ingredients = new List<Ingredient> {
-                    new Ingredient { Id = Guid.NewGuid(), Name = "Coffee", IsAlergen = false },
-                    new Ingredient { Id = Guid.NewGuid(), Name = "mixture of oriental spices", IsAlergen =false },
-                },
-            IsOptionAvailable = true,
-            IsSignature = false,
-            Options = new List<string> { "Milk", "Almond Milk", "Oat Milk", "Coconut Milk" },
-            BestServed = BestServeType.Hot,
-            Family = FoodFamily.Coffee,
-            Price = 2.50M
-            }
-        };
-
-            _coffeeRepository.Add(beverages);
-        }
 
         void GetCoffeeList()
         {

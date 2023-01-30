@@ -21,7 +21,8 @@
         Pastry = 16,
         Cookie = 17,
         Cake = 18,
-        Chips = 19
+        Chips = 19,
+        Chocolate = 20,
     }
 }
 
