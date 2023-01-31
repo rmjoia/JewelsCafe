@@ -2,6 +2,7 @@
 using JewelsCafe.Repositories;
 using JewelsCafe.Services;
 using Microsoft.Extensions.Logging;
+using System.Collections.ObjectModel;
 
 namespace JewelsCafe.ViewModels
 {
@@ -14,7 +15,7 @@ namespace JewelsCafe.ViewModels
         public SoftDrinksViewModel(ILogger<SoftDrinksViewModel> logger,
             GenericRepository<Beverage> beverageRepository,
             OrderService orderService,
-            CheckoutService checkoutService) : base(checkoutService)
+            CheckoutService checkoutService) : base(logger, checkoutService, orderService)
         {
             Title = "Refresh yourself...";
             _logger = logger;
@@ -23,5 +24,7 @@ namespace JewelsCafe.ViewModels
             
             UpdateCart();
         }
+
+        public ObservableCollection<Food> SoftDrinksList { get; private set; }
     }
 }

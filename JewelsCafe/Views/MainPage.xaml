@@ -9,17 +9,35 @@
 
     <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="100, *, Auto" >
 
-        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="50,30,0,0">
-            <HorizontalStackLayout>
-                <Label Text="Cart: " VerticalTextAlignment="Center" FontSize="Header" />
-                <Label Text="{ Binding TotalAmount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout >
-                <Label Text="Items in Cart: " VerticalTextAlignment="Center"  HorizontalTextAlignment="End" FontSize="Header" />
-                <Label Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
+        <!-- Shopping Cart -->
+        <!-- In a real world scenario, I would extract this as a component and reuse -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="10">
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Items in Cart: " VerticalTextAlignment="Center" FontSize="Header" />
+            <Label Grid.Column="2" Grid.Row="0" Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+            
+            <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Total: " VerticalTextAlignment="Center" FontSize="Header" />
+            <Label Grid.Column="2" Grid.Row="1" Text="{Binding TotalAmount, StringFormat='{0:C2}'}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+
+            <ImageButton Grid.Column="3" Grid.RowSpan="2" Source="cart_icon.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="80" WidthRequest="80"/>
+        </Grid>
+
+        <!-- Coffee List View -->
+        <!-- In a real world scenario, I would extract this as a component and reuse this list could also be templated
+        Additionally, this could be extended with gestures to left and right to add to cart and remove to cart and pull down to refresh, from the api... 
+        but was overkill for this CA and there's no requirement for an API with updates in real time... -->
         <CollectionView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding CoffeeList}" SelectionMode="Single">
 
             <CollectionView.ItemTemplate>

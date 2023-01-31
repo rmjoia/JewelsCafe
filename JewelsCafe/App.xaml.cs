@@ -109,7 +109,7 @@ public partial class App : Application
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Coffee,
                 Price = 5.00M,
-                Picture = "coffee.png"
+                Picture = "cappuccino_icon.png"
             },
             new Beverage {
                 Id = Guid.NewGuid(),
@@ -126,7 +126,7 @@ public partial class App : Application
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Coffee,
                 Price = 5.00M,
-                Picture = "coffee.png"
+                Picture = "latte_icon.png"
             },
         };
 
@@ -145,7 +145,7 @@ public partial class App : Application
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Tea,
                 Price = 2.0M,
-                Picture = "coffee.png"
+                Picture = "green_tea_icon.png"
             },
             new Beverage {
                 Id = Guid.NewGuid(),
@@ -175,7 +175,7 @@ public partial class App : Application
                 BestServed = BestServeType.Hot,
                 Family = FoodFamily.Tea,
                 Price = 2.0M,
-                Picture = "coffee.png"
+                Picture = "black_tea_icon.png"
             },
         };
 
