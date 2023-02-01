@@ -23,8 +23,35 @@ namespace JewelsCafe.ViewModels
             _orderService = orderService;
             
             UpdateCart();
+            GetSoftDrinksList();
         }
 
-        public ObservableCollection<Food> SoftDrinksList { get; private set; }
+        public ObservableCollection<Beverage> SoftDrinksList { get; private set; }
+
+        void GetSoftDrinksList()
+        {
+            if (IsLoading)
+            {
+                return;
+            }
+            try
+            {
+                SoftDrinksList = new();
+                IsLoading = true;
+                _softDrinksRepository
+                    .GetAll()
+                    .Where(beverage => beverage.Family == FoodFamily.Soda || beverage.Family == FoodFamily.Juice)
+                    .ToList()
+                    .ForEach(softDrink => SoftDrinksList.Add((softDrink as Beverage)));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("an error has occurred while getting the coffee list!", ex.Message);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
     }
 }

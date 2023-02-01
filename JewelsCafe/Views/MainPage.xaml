@@ -41,15 +41,18 @@
         <CollectionView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding CoffeeList}" SelectionMode="Single">
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Food" >
+                <DataTemplate x:DataType="model:Beverage" >
                     <Frame HeightRequest="90">
-                        <Grid ColumnDefinitions="60,180,40,60" >
-                            <Image Grid.Column="0" Source="{Binding Picture}" Aspect="AspectFit" />
-                            <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="5">
+                        <Grid ColumnDefinitions="15,60,170,40,50" >
+                            
+                            <!-- Some function that would get an update of how many items are currently in the cart of this item -->
+                            
+                            <Image Grid.Column="1" Source="{Binding Picture}" Aspect="AspectFit" />
+                            <VerticalStackLayout Grid.Column="2" Padding="10" Spacing="5">
                                 <Label LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Header" />
                                 <Label LineBreakMode="WordWrap" Text="{Binding Price}" FontSize="Header" />
                             </VerticalStackLayout>
-                            <HorizontalStackLayout Grid.Column="2">
+                            <HorizontalStackLayout Grid.Column="3">
                                 <Button BackgroundColor="Green" Margin="0,0,0,5"
                                         IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CoffeeListViewModel}}, Path=IsDoneLoading}"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CoffeeListViewModel}}, Path=AddToCartCommand}"
@@ -57,7 +60,7 @@
                                         Text="+"
                                         FontAttributes="Bold"/>
                             </HorizontalStackLayout>
-                            <HorizontalStackLayout Grid.Column="3">
+                            <HorizontalStackLayout Grid.Column="4">
                                 <Button BackgroundColor="Red" Margin="10,0,0,5" 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CoffeeListViewModel}}, Path=RemoveFromCartCommand}" 
                                         CommandParameter="{Binding Id}"

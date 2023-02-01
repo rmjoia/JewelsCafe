@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using JewelsCafe.Models;
+﻿using JewelsCafe.Models;
 using JewelsCafe.Repositories;
 using JewelsCafe.Services;
 using Microsoft.Extensions.Logging;
@@ -13,6 +12,8 @@ namespace JewelsCafe.ViewModels
         private readonly GenericRepository<Beverage> _coffeeRepository;
         private readonly ILogger<CoffeeListViewModel> _logger;
 
+        public ObservableCollection<Beverage> ItemsInOrder;
+       
         public CoffeeListViewModel(ILogger<CoffeeListViewModel> logger, 
             GenericRepository<Beverage> genericRepository, 
             OrderService orderService,
@@ -23,6 +24,7 @@ namespace JewelsCafe.ViewModels
             _logger = logger;
             _coffeeRepository = genericRepository;
 
+            UpdateCart();
             GetCoffeeList();
         }
 
@@ -52,6 +54,6 @@ namespace JewelsCafe.ViewModels
             {
                 IsLoading = false;
             }
-        }        
+        }
     }
 }

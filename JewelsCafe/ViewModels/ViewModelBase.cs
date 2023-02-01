@@ -69,7 +69,7 @@ namespace JewelsCafe.ViewModels
             }
         }
 
-        protected void UpdateCart()
+        public void UpdateCart()
         {
             IsLoading = true;
 

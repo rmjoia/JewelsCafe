@@ -75,11 +75,6 @@ namespace JewelsCafe.Repositories
         {
             var item = _repo.FirstOrDefault(b => b.Id == id);
 
-            if (item == null)
-            {
-                throw new ArgumentException($"Invalid Id: {id}");
-            }
-
             try
             {
                 return item;

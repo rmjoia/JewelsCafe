@@ -41,7 +41,7 @@
         <CollectionView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding SoftDrinksList}" SelectionMode="Single">
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Food" >
+                <DataTemplate x:DataType="model:Beverage" >
                     <Frame HeightRequest="90">
                         <Grid ColumnDefinitions="60,180,40,60" >
                             <Image Grid.Column="0" Source="{Binding Picture}" Aspect="AspectFit" />

@@ -39,7 +39,7 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Soda,
                 Price = 2.50M,
-                Picture = "coffee.png"
+                Picture = "coca_cola_icon.png"
             },
             new Beverage {
                 Id =  Guid.NewGuid(),
@@ -55,7 +55,7 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Soda,
                 Price = 2.50M,
-                Picture = "coffee.png"
+                Picture = "fanta_icon.png"
             },
             new Beverage {
                 Id =  Guid.NewGuid(),
@@ -70,14 +70,14 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Juice,
                 Price = 2.50M,
-                Picture = "coffee.png"
+                Picture = "orange_squeeze_icon.png"
             }
         };
 
         var coffees = new List<IFood>
         {
             new Beverage {
-                Id = Guid.NewGuid(),
+                Id = new Guid("f1b5b1f0-5f9f-4b9f-9c1c-1b1b1b1b1b1b"),
                 Name = "Jewel's Roast Coffee",
                 Description = "Dark custom blend of arabian selected coffee and a mixture of spices",
                 Ingredients = new List<Ingredient> {
@@ -181,7 +181,7 @@ public partial class App : Application
 
         var chocolates = new List<IFood>
         {
-            new Beverage {
+            new Food {
                 Id = Guid.NewGuid(),
                 Name = "M&Ms",
                 Description = "Lovely with a cup of tea",
@@ -194,9 +194,9 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Chocolate,
                 Price = 2.0M,
-                Picture = "coffee.png"
+                Picture = "m_and_ms_icon.png"
             },
-            new Beverage {
+            new Food {
                 Id = Guid.NewGuid(),
                 Name = "Lion Bar",
                 Description = "A poor man's Toffee Crisp",
@@ -210,9 +210,9 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Chocolate,
                 Price = 2.0M,
-                Picture = "coffee.png"
+                Picture = "lion_icon.png"
             },
-            new Beverage {
+            new Food {
                 Id = Guid.NewGuid(),
                 Name = "Twix",
                 Description = "You want a Twix right now, don't you?",
@@ -227,9 +227,9 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Chocolate,
                 Price = 2.0M,
-                Picture = "coffee.png"
+                Picture = "twix_icon.png"
             },
-            new Beverage {
+            new Food {
                 Id = Guid.NewGuid(),
                 Name = "Mars",
                 Description = "It came THIS close to taking the top spot, beaten only by another classic...",
@@ -243,7 +243,7 @@ public partial class App : Application
                 BestServed = BestServeType.Cold,
                 Family = FoodFamily.Chocolate,
                 Price = 2.0M,
-                Picture = "coffee.png"
+                Picture = "mars_icon.png"
             },
         };
 
