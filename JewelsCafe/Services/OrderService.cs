@@ -66,6 +66,11 @@ namespace JewelsCafe.Services
             return operation;
         }
 
+        internal int GetCountById(Guid id)
+        {
+            return 0;
+        }
+
         private IFood GetFoodItem(Guid foodId)
         {
             IFood food = _beverageRepository.GetById(foodId);
