@@ -76,11 +76,17 @@ namespace JewelsCafe.ViewModels
 
             try
             {
+                var currentAmount = TotalAmount;
+
                 var result = _checkoutService.Update();
 
-                CartCount = result.ToList().Count();
+                CartCount = result.ToList().Count;
                 TotalAmount = result.Sum(items => items.Price);
-                _orderService.OnOrderChanged();
+
+                if (TotalAmount != currentAmount)
+                {
+                    _orderService.OnOrderChanged();
+                }
             }
             catch (Exception)
             {

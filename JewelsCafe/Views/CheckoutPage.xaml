@@ -85,7 +85,7 @@
                 <VerticalStackLayout Grid.Row="0" Grid.Column="0" Margin="5" >
                     <HorizontalStackLayout HorizontalOptions="End">
                         <Label Text="Items in Cart: " VerticalTextAlignment="Center" FontSize="Header" Padding="0,0,50,0" FontAttributes="Bold" />
-                        <Label Text="{Binding OrderList.Count}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" />
+                        <Label Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout HorizontalOptions="End">
                         <Label Grid.ColumnSpan="2" Text="Total: " VerticalTextAlignment="Center" FontSize="Header" Padding="0,0,22,0" FontAttributes="Bold" />

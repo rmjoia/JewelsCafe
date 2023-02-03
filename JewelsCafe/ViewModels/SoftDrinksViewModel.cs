@@ -21,7 +21,15 @@ namespace JewelsCafe.ViewModels
             _logger = logger;
             _softDrinksRepository = beverageRepository;
             _orderService = orderService;
+
+            _orderService.OrderChanged += orderService_OrderChanged;
             
+            UpdateCart();
+            GetSoftDrinksList();
+        }
+
+        private void orderService_OrderChanged(object sender, EventArgs e)
+        {
             UpdateCart();
             GetSoftDrinksList();
         }
@@ -51,6 +59,14 @@ namespace JewelsCafe.ViewModels
             finally
             {
                 IsLoading = false;
+            }
+        }
+
+        ~SoftDrinksViewModel()
+        {
+            if (orderService_OrderChanged != null)
+            {
+                _orderService.OrderChanged -= orderService_OrderChanged;
             }
         }
     }

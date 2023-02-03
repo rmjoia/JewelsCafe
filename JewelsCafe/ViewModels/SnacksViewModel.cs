@@ -11,10 +11,11 @@ namespace JewelsCafe.ViewModels
     {
         private readonly ILogger<SnacksViewModel> _logger;
         private readonly GenericRepository<Food> _snacksRepository;
+        private readonly OrderService _orderService;
 
         public SnacksViewModel(
-            ILogger<SnacksViewModel> logger, 
-            OrderService orderService, 
+            ILogger<SnacksViewModel> logger,
+            OrderService orderService,
             CheckoutService checkoutService,
             GenericRepository<Food> snacksRepository
             ) : base(logger, checkoutService, orderService)
@@ -22,11 +23,21 @@ namespace JewelsCafe.ViewModels
             Title = "Take some time... Have a snack...";
             _logger = logger;
             _snacksRepository = snacksRepository;
-            
+
+            _orderService = orderService;
+
+            _orderService.OrderChanged += orderService_OrderChanged;
+
             UpdateCart();
             GetSnacksList();
         }
-        
+
+        private void orderService_OrderChanged(object sender, EventArgs e)
+        {
+            UpdateCart();
+            GetSnacksList();
+        }
+
         public ObservableCollection<Food> SnacksList { get; private set; }
 
         void GetSnacksList()
@@ -37,7 +48,7 @@ namespace JewelsCafe.ViewModels
             }
             try
             {
-                
+
 
                 SnacksList = new();
                 IsLoading = true;
@@ -54,6 +65,14 @@ namespace JewelsCafe.ViewModels
             finally
             {
                 IsLoading = false;
+            }
+        }
+
+        ~SnacksViewModel()
+        {
+            if (orderService_OrderChanged != null)
+            {
+                _orderService.OrderChanged -= orderService_OrderChanged;
             }
         }
     }

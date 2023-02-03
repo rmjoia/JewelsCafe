@@ -8,9 +8,10 @@ namespace JewelsCafe.ViewModels
 {
     public partial class CoffeeListViewModel : ViewModelBase
     {
-        private readonly GenericRepository<Beverage> _coffeeRepository;
         private readonly ILogger<CoffeeListViewModel> _logger;
-
+        private readonly GenericRepository<Beverage> _coffeeRepository;
+        private readonly OrderService _orderService;
+        
         public ObservableCollection<Beverage> ItemsInOrder;
        
         public CoffeeListViewModel(ILogger<CoffeeListViewModel> logger, 
@@ -22,7 +23,16 @@ namespace JewelsCafe.ViewModels
             Title = "Try our Selected Blends...";
             _logger = logger;
             _coffeeRepository = genericRepository;
+            _orderService = orderService;
 
+            _orderService.OrderChanged += orderService_OrderChanged;
+
+            UpdateCart();
+            GetCoffeeList();
+        }
+
+        private void orderService_OrderChanged(object sender, EventArgs e)
+        {
             UpdateCart();
             GetCoffeeList();
         }
@@ -52,6 +62,14 @@ namespace JewelsCafe.ViewModels
             finally
             {
                 IsLoading = false;
+            }
+        }
+
+        ~CoffeeListViewModel()
+        {
+            if (orderService_OrderChanged != null)
+            {
+                _orderService.OrderChanged -= orderService_OrderChanged;
             }
         }
     }

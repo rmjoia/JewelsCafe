@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using JewelsCafe.Models;
 using JewelsCafe.Services;
 using Microsoft.Extensions.Logging;
@@ -24,17 +25,18 @@ namespace JewelsCafe.ViewModels
             _checkoutService = checkoutService;
             _orderService = orderService;
 
-            _orderService.OrderChanged += _orderService_OrderChanged;
+            UpdateCart();
+            _orderService.OrderChanged += orderService_OrderChanged;
         }
 
         public ObservableCollection<OrderItem> OrderList { get; set; } = new();
 
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
-        public decimal GrandTotal { get; set; } = 0m;
 
-        private void _orderService_OrderChanged(object sender, EventArgs e)
+        private void orderService_OrderChanged(object sender, EventArgs e)
         {
+            UpdateCart();
             UpdateCheckoutList();
         }
 
@@ -44,13 +46,20 @@ namespace JewelsCafe.ViewModels
 
             var distinctOrders = _orderService.GetAll().Distinct().ToList();
 
-            distinctOrders.ForEach(order => OrderList.Add(new OrderItem {
+            distinctOrders.ForEach(order => OrderList.Add(new OrderItem
+            {
                 Food = order,
                 Price = order.Price,
                 Quantity = _orderService.GetAll().Where(food => food.Name == order.Name).Count()
             }));
+        }
 
-            GrandTotal = OrderList.Sum(order => order.Price);
+        ~CheckoutViewModel()
+        {
+            if (orderService_OrderChanged != null)
+            {
+                _orderService.OrderChanged -= orderService_OrderChanged;
+            }
         }
     }
 }
