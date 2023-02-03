@@ -36,7 +36,8 @@ public static class MauiProgram
         builder.Services.AddScoped<SoftDrinksPage>();
         builder.Services.AddScoped<SnacksPage>();
         builder.Services.AddScoped<AdminPage>();
-        
+        builder.Services.AddScoped<CheckoutPage>();
+
         return builder;
     }
 
@@ -46,7 +47,8 @@ public static class MauiProgram
         builder.Services.AddScoped<SoftDrinksViewModel>();
         builder.Services.AddScoped<SnacksViewModel>();
         builder.Services.AddScoped<AdminViewModel>();
-        
+        builder.Services.AddScoped<CheckoutViewModel>();
+
         return builder;
     }
 

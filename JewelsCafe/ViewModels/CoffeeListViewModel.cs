@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 
 namespace JewelsCafe.ViewModels
 {
-    [QueryProperty(nameof(Food.Id), "Id")]
     public partial class CoffeeListViewModel : ViewModelBase
     {
         private readonly GenericRepository<Beverage> _coffeeRepository;

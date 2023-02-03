@@ -14,6 +14,8 @@ namespace JewelsCafe.Services
         private readonly GenericRepository<Food> _foodRepository;
         private readonly string error = "An exception ocurred while {0}: {1}";
 
+        public event EventHandler OrderChanged;
+
         public OrderService(
             ILogger<OrderService> logger, 
             GenericRepository<IFood> orderRepository, 
@@ -27,7 +29,16 @@ namespace JewelsCafe.Services
             _foodRepository = foodRepository;
 
         }
-        
+
+        private IFood GetFoodItem(Guid foodId)
+        {
+            IFood food = _beverageRepository.GetById(foodId);
+
+            food ??= _foodRepository.GetById(foodId);
+
+            return food;
+        }
+
         public bool AddToOrder(Guid foodId)
         {
             bool operation = false;
@@ -66,18 +77,21 @@ namespace JewelsCafe.Services
             return operation;
         }
 
-        internal int GetCountById(Guid id)
+        public int GetCountById(Guid id)
         {
             return 0;
         }
 
-        private IFood GetFoodItem(Guid foodId)
+        public IEnumerable<IFood> GetAll()
         {
-            IFood food = _beverageRepository.GetById(foodId);
-
-            food ??= _foodRepository.GetById(foodId);
-
-            return food;
+            return _orderRepository.GetAll();
         }
+
+        public void OnOrderChanged()
+        {
+            EventHandler handler = OrderChanged;
+            if(null != handler) handler(this, EventArgs.Empty);
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using JewelsCafe.Models;
 using JewelsCafe.Services;
+using JewelsCafe.Views;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 
@@ -79,6 +80,7 @@ namespace JewelsCafe.ViewModels
 
                 CartCount = result.ToList().Count();
                 TotalAmount = result.Sum(items => items.Price);
+                _orderService.OnOrderChanged();
             }
             catch (Exception)
             {
@@ -88,6 +90,12 @@ namespace JewelsCafe.ViewModels
             {
                 IsLoading = false;
             }
+        }
+
+        [RelayCommand]
+        async Task CheckOut()
+        {
+            await Shell.Current.GoToAsync(nameof(CheckoutPage), true);
         }
     }
 }
