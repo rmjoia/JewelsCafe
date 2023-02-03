@@ -10,6 +10,8 @@ namespace JewelsCafe.Repositories
         IEnumerable<T> GetAll();
 		T Update(T item);
 		void Delete(Guid id);
-	}
+		public void Clear();
+
+    }
 }
 

@@ -57,6 +57,7 @@ public static class MauiProgram
         builder.Services.AddScoped<MenuService>();
         builder.Services.AddScoped<OrderService>();
         builder.Services.AddScoped<CheckoutService>();
+        builder.Services.AddScoped<FileService>();
 
         return builder;
     }

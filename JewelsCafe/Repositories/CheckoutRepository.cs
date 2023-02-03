@@ -1,22 +1,23 @@
-﻿using System;
-using JewelsCafe.Models;
+﻿using JewelsCafe.Models;
 using Microsoft.Extensions.Logging;
 
 namespace JewelsCafe.Repositories
 {
-    public class GenericRepository<T> : IRepository<IFood> where T : IFood
+    public class CheckoutRepository : IRepository<Checkout>
     {
-        private readonly string error = $"An exception ocurred while {0} a {nameof(T)}: {1}";
-        private readonly ILogger<T> _logger;
-        private List<IFood> _repo;
+        private readonly string error = $"An exception ocurred while {0} a {nameof(Checkout)}: {1}";
 
-        public GenericRepository(ILogger<T> logger)
+        private readonly ILogger<CheckoutRepository> _logger;
+
+        private List<Checkout> _repo;
+
+        public CheckoutRepository(ILogger<CheckoutRepository> logger)
         {
-            _repo = new();
             _logger = logger;
+            _repo = new();
         }
 
-        public IFood Add(IFood item)
+        public Checkout Add(Checkout item)
         {
             try
             {
@@ -32,7 +33,7 @@ namespace JewelsCafe.Repositories
             return item;
         }
 
-        public IEnumerable<IFood> Add(List<IFood> items)
+        public IEnumerable<Checkout> Add(List<Checkout> items)
         {
             try
             {
@@ -45,6 +46,11 @@ namespace JewelsCafe.Repositories
             }
 
             return items;
+        }
+
+        public void Clear()
+        {
+            _repo.Clear();
         }
 
         public void Delete(Guid id)
@@ -66,12 +72,12 @@ namespace JewelsCafe.Repositories
             }
         }
 
-        public IEnumerable<IFood> GetAll()
+        public IEnumerable<Checkout> GetAll()
         {
             return _repo.Select(b => b);
         }
 
-        public IFood GetById(Guid id)
+        public Checkout GetById(Guid id)
         {
             var item = _repo.FirstOrDefault(b => b.Id == id);
 
@@ -86,20 +92,14 @@ namespace JewelsCafe.Repositories
             }
         }
 
-        public IEnumerable<IFood> GetByIds(List<Guid> ids)
+        public IEnumerable<Checkout> GetByIds(List<Guid> ids)
         {
             throw new NotImplementedException();
         }
 
-        public IFood Update(IFood item)
+        public Checkout Update(Checkout item)
         {
             throw new NotImplementedException();
-        }
-
-        public void Clear()
-        {
-            _repo.Clear();
         }
     }
 }
-
