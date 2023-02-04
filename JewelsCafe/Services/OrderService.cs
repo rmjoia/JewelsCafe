@@ -1,5 +1,4 @@
-﻿
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using JewelsCafe.Models;
 using JewelsCafe.Repositories;
 using Microsoft.Extensions.Logging;
@@ -12,21 +11,24 @@ namespace JewelsCafe.Services
         private readonly GenericRepository<IFood> _orderRepository;
         private readonly GenericRepository<Beverage> _beverageRepository;
         private readonly GenericRepository<Food> _foodRepository;
+        private readonly FileService _fileService;
         private readonly string error = "An exception ocurred while {0}: {1}";
 
         public event EventHandler OrderChanged;
 
         public OrderService(
-            ILogger<OrderService> logger, 
-            GenericRepository<IFood> orderRepository, 
+            ILogger<OrderService> logger,
+            GenericRepository<IFood> orderRepository,
             GenericRepository<Beverage> beverageRepository,
-            GenericRepository<Food> foodRepository
+            GenericRepository<Food> foodRepository,
+            FileService fileService
             )
         {
             _logger = logger;
             _orderRepository = orderRepository;
             _beverageRepository = beverageRepository;
             _foodRepository = foodRepository;
+            _fileService = fileService;
 
         }
 
@@ -90,8 +92,18 @@ namespace JewelsCafe.Services
         public void OnOrderChanged()
         {
             EventHandler handler = OrderChanged;
-            if(null != handler) handler(this, EventArgs.Empty);
+            if (null != handler) handler(this, EventArgs.Empty);
         }
 
+        internal void PlaceOrder(Order order)
+        {
+            var receipt = _fileService.SaveToFileAsync(order);
+            Shell.Current.DisplayAlert("Order placed", $"Your order has been placed. Your receipt was saved @ {receipt}", "OK");
+        }
+
+        internal void Clear()
+        {
+            _orderRepository.Clear();
+        }
     }
 }
