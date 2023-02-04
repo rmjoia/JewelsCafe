@@ -2,14 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JewelsCafe.Views.MainPage"
-             xmlns:local="clr-namespace:JewelsCafe.Converters"
              xmlns:model="clr-namespace:JewelsCafe.Models"
              xmlns:viewmodel="clr-namespace:JewelsCafe.ViewModels"
              x:DataType="viewmodel:CoffeeListViewModel"
              Title="{Binding Title}">
-    <ContentPage.Resources>
-        <local:IdToCountConverter x:Key="IdToCounter" />
-    </ContentPage.Resources>
 
     <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="100, *, Auto" >
 
@@ -52,9 +48,7 @@
                             
                             <!-- 
                             Some function that would get an update of how many items are currently in the cart of this item 
-                            Maybe I would have to use a message bus, or events, anyway, I think it wasn't a requirement and it's not a good idea to overcomplicate things
-                            
-                            <Label Grid.Column="0" VerticalTextAlignment="Center" Text="{Binding Id, Converter={StaticResource IdToCounter}}" />-->
+                            Maybe I would have to use a message bus, or events, anyway, I think it wasn't a requirement and it's not a good idea to overcomplicate things -->
 
                             <Image Grid.Column="0" Source="{Binding Picture}" Aspect="AspectFit" />
                             <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="5">

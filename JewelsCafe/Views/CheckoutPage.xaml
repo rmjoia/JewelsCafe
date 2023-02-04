@@ -7,7 +7,7 @@
              x:DataType="viewmodel:CheckoutViewModel"
              Title="{Binding Title}">
 
-    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions=".5*,.3*" >
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions=".5*,.3*, Auto" >
 
         <!-- Order List List -->
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="5,5,0,5">

@@ -57,6 +57,7 @@ public static class MauiProgram
         builder.Services.AddScoped<MenuService>();
         builder.Services.AddScoped<OrderService>();
         builder.Services.AddScoped<CheckoutService>();
+        builder.Services.AddScoped<FileService>();
 
         return builder;
     }
@@ -66,6 +67,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<GenericRepository<Beverage>>();
         builder.Services.AddSingleton<GenericRepository<Food>>();
         builder.Services.AddSingleton<GenericRepository<IFood>>();
+        builder.Services.AddSingleton<CheckoutRepository>();
 
         return builder;
     }
