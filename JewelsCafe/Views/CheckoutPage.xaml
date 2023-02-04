@@ -7,111 +7,98 @@
              x:DataType="viewmodel:CheckoutViewModel"
              Title="{Binding Title}">
 
-    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions=".5*,.3*, Auto" >
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*,100, 200" >
 
-        <!-- Order List List -->
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="5,5,0,5">
+        <!-- Order List List View -->
+        
+        <CollectionView Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding OrderList}" SelectionMode="None">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:OrderItem" >
+                    <Frame HeightRequest="80" Padding="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="80" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{Binding Food.Picture}" VerticalOptions="Center" Aspect="AspectFit" HeightRequest="50" />
 
-            <CollectionView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding OrderList}" SelectionMode="Single">
+                            <Grid ColumnDefinitions="140,40,40" Grid.Column="1" RowDefinitions="Auto,Auto" VerticalOptions="Center" >
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:OrderItem" >
-                        <Frame HeightRequest="50" Padding="5" WidthRequest="383" >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60" />
-                                    <ColumnDefinition Width="220" />
-                                    <ColumnDefinition Width="40" />
-                                    <ColumnDefinition Width="80" />
-                                </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0" Source="{Binding Food.Picture}" VerticalOptions="Center" Aspect="AspectFit" HeightRequest="50" />
+                                <Label Grid.Column="0" Grid.Row="0" LineBreakMode="WordWrap" Text="Item" FontSize="Default" FontAttributes="Bold" />
+                                <Label Grid.Column="1"  Grid.Row="0" LineBreakMode="WordWrap" Text="Price" FontSize="Default" FontAttributes="Bold" />
+                                <Label Grid.Column="2" Grid.Row="0" LineBreakMode="WordWrap" Text="Qty." FontSize="Default" FontAttributes="Bold" />
 
-                                <Grid ColumnDefinitions="140,40,40" Grid.Column="1" RowDefinitions="Auto,Auto" VerticalOptions="Center" >
+                                <Label Grid.Column="0" Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Food.Name}" FontSize="Caption" />
+                                <Label Grid.Column="1"  Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Food.Price}" FontSize="Caption" />
+                                <Label Grid.Column="2" Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Quantity}" FontSize="Caption" />
+                            </Grid>
 
-                                    <Label Grid.Column="0" Grid.Row="0" LineBreakMode="WordWrap" Text="Item" FontSize="Header" FontAttributes="Bold" />
-                                    <Label Grid.Column="1"  Grid.Row="0" LineBreakMode="WordWrap" Text="Price" FontSize="Header" FontAttributes="Bold" />
-                                    <Label Grid.Column="2" Grid.Row="0" LineBreakMode="WordWrap" Text="Qty." FontSize="Header" FontAttributes="Bold" />
-
-                                    <Label Grid.Column="0" Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Food.Name}" FontSize="Header" />
-                                    <Label Grid.Column="1"  Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Food.Price}" FontSize="Header" />
-                                    <Label Grid.Column="2" Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Quantity}" FontSize="Header" />
-                                </Grid>
-
-                                <HorizontalStackLayout Grid.Column="2">
-                                    <Button BackgroundColor="Green" Margin="0,0,0,5"
+                            <HorizontalStackLayout Grid.Column="2">
+                                <Button BackgroundColor="Green" Margin="0,0,0,5" 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CheckoutViewModel}}, Path=AddToCartCommand}"
                                         CommandParameter="{Binding Food.Id}"
                                         Text="+"
-                                        FontAttributes="Bold"
-                                            VerticalOptions="Center"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Grid.Column="3">
-                                    <Button BackgroundColor="Red" Margin="10,0,0,5" 
+                                        FontAttributes="Bold" 
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="3">
+                                <Button BackgroundColor="Red" Margin="10,0,0,5" 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CheckoutViewModel}}, Path=RemoveFromCartCommand}" 
                                         CommandParameter="{Binding Food.Id}"
                                         Text="-"
                                         FontAttributes="Bold"
                                         VerticalOptions="Center"/>
-                                </HorizontalStackLayout>
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
 
-            </CollectionView>
+        </CollectionView>
 
 
-        </Grid>
+        <!-- Grand Total and item Count -->
 
-        <!-- Customer Data -->
-        <Grid Grid.ColumnSpan="2" Grid.Row="1" RowDefinitions="Auto,Auto,Auto,*" >
+        <Border Grid.Row="1" Grid.ColumnSpan="2" StrokeThickness="1" Stroke="Gray" Padding="5" Margin="5" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15" />
+            </Border.StrokeShape>
+            <VerticalStackLayout Grid.Row="0" Grid.Column="0" Margin="5" >
+                <HorizontalStackLayout HorizontalOptions="End">
+                    <Label Text="Items in Cart: " VerticalTextAlignment="Center" FontSize="Title" Padding="0,0,50,0" FontAttributes="Bold" />
+                    <Label Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" Padding="0,0,50,0" FontAttributes="Bold" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="End">
+                    <Label Grid.ColumnSpan="2" Text="Total: " VerticalTextAlignment="Center" FontSize="Title" Padding="0,0,42,0" FontAttributes="Bold" />
+                    <Label Text="{Binding TotalAmount, StringFormat='{0:C2}'}" VerticalTextAlignment="Center" Padding="0,0,20,0" FontAttributes="Bold" HorizontalTextAlignment="End" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
 
-            <Border Grid.Row="0" StrokeThickness="1" Stroke="Gray" Padding="5" >
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15" />
-                </Border.StrokeShape>
-                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Margin="5" >
-                    <HorizontalStackLayout HorizontalOptions="End">
-                        <Label Text="Items in Cart: " VerticalTextAlignment="Center" FontSize="Header" Padding="0,0,50,0" FontAttributes="Bold" />
-                        <Label Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout HorizontalOptions="End">
-                        <Label Grid.ColumnSpan="2" Text="Total: " VerticalTextAlignment="Center" FontSize="Header" Padding="0,0,22,0" FontAttributes="Bold" />
-                        <Label Text="{Binding TotalAmount, StringFormat='{0:C2}'}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" />
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
-            </Border>
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" RowDefinitions="Auto,Auto,Auto">
+            
+            <VerticalStackLayout Grid.Row="0" Padding="5">
+                <Label Text="Enter your name" FontAttributes="Bold"/>
+                <Entry
+                  MaxLength="255"
+                  Text="{Binding CustomerName}" Placeholder="Enter your name" />
+            </VerticalStackLayout>
 
             <VerticalStackLayout Grid.Row="1" Padding="5">
-                <Label Text="{Binding CustomerName}" FontAttributes="Bold"/>
+                <Label Text="Enter your Telephone Number" FontAttributes="Bold"/>
                 <Entry
                   MaxLength="255"
-                  Text="name" Placeholder="Enter your name" />
+                  Text="{Binding CustomerPhoneNumber}" Placeholder="Enter your Telephone Number" />
             </VerticalStackLayout>
 
-            <VerticalStackLayout Grid.Row="2" Padding="5">
-                <Label Text="{Binding CustomerEmail}" FontAttributes="Bold"/>
-                <Entry
-                  MaxLength="255"
-                  Text="email" Placeholder="Enter your email" />
-            </VerticalStackLayout>
-
-            <Button Grid.Row="3" Text="Place Order" Margin="5" />
-            
+            <Button Grid.Row="2" Text="Place Order" Margin="5" Command="{Binding PlaceOrderCommand}" />
         </Grid>
 
     </Grid>
 
 </ContentPage>
+

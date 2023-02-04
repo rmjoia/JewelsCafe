@@ -1,7 +1,7 @@
 ﻿using JewelsCafe.Models;
 using Microsoft.Extensions.Logging;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace JewelsCafe.Services
 {
@@ -48,8 +48,16 @@ namespace JewelsCafe.Services
             sb.AppendLine($"Total: {order.OrderItems.Sum(items => items.Price * items.Quantity)}");
 
 
-            // Write the file content to the app data directory @"/storage/emulated/0/Documents"
-            string targetFile = System.IO.Path.Combine(@"/storage/emulated/0/Download", targetFileName);
+            string folder = "";
+            
+#if WINDOWS
+
+
+#else
+            folder = FileSystem.Current.AppDataDirectory;
+#endif
+            
+            string targetFile = System.IO.Path.Combine(folder, targetFileName);
 
             try
             {

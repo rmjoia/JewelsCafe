@@ -22,7 +22,9 @@ public static class MauiProgram
             .RegisterViews()
             .RegisterViewModels()
             .RegisterServices()
-            .RegisterRepositories();
+            .RegisterRepositories()
+            .RegisterInterfaces();
+        
 
 #if DEBUG
         builder.Logging.AddDebug();
@@ -68,6 +70,12 @@ public static class MauiProgram
         builder.Services.AddSingleton<GenericRepository<Food>>();
         builder.Services.AddSingleton<GenericRepository<IFood>>();
         builder.Services.AddSingleton<CheckoutRepository>();
+
+        return builder;
+    }
+    
+    private static MauiAppBuilder RegisterInterfaces(this MauiAppBuilder builder)
+    {
 
         return builder;
     }

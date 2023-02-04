@@ -14,10 +14,17 @@ namespace JewelsCafe.ViewModels
         private CheckoutService _checkoutService;
         private OrderService _orderService;
 
+        [ObservableProperty]
+        private string customerName;
+
+        [ObservableProperty]
+        private string customerPhoneNumber;
+
         public CheckoutViewModel(
             ILogger<CheckoutViewModel> logger,
             CheckoutService checkoutService,
-            OrderService orderService) : base(logger, checkoutService, orderService)
+            OrderService orderService
+            ) : base(logger, checkoutService, orderService)
         {
             Title = "Checkout";
 
@@ -31,8 +38,7 @@ namespace JewelsCafe.ViewModels
 
         public ObservableCollection<OrderItem> OrderList { get; set; } = new();
 
-        public string CustomerName { get; set; }
-        public string CustomerEmail { get; set; }
+
 
         private void orderService_OrderChanged(object sender, EventArgs e)
         {
@@ -52,6 +58,29 @@ namespace JewelsCafe.ViewModels
                 Price = order.Price,
                 Quantity = _orderService.GetAll().Where(food => food.Name == order.Name).Count()
             }));
+        }
+
+        [RelayCommand]
+        async Task PlaceOrder()
+        {
+            if (string.IsNullOrEmpty(CustomerName) || string.IsNullOrEmpty(CustomerPhoneNumber))
+            {
+                await Shell.Current.DisplayAlert("Warning", "Please enter your name and email address.", "OK");
+                return;
+            }
+
+            var order = new Order
+            {
+                CustomerName = CustomerName,
+                CustomerPhoneNumber = CustomerPhoneNumber,
+                OrderItems = _orderService.GetAll().Select(food => new OrderItem { Food = food }).ToList()
+            };
+
+            _checkoutService.Checkout(order);
+            CustomerName = "";
+            CustomerPhoneNumber = "";
+            UpdateCart();
+            UpdateCheckoutList();
         }
 
         ~CheckoutViewModel()

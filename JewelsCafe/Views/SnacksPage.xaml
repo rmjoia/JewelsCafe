@@ -14,24 +14,23 @@
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="10">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="110" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Items in Cart: " VerticalTextAlignment="Center" FontSize="Header" />
-            <Label Grid.Column="2" Grid.Row="0" Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Items in Cart: " VerticalTextAlignment="Center" FontSize="Small" />
+            <Label Grid.Column="1" Grid.Row="0" Text="{Binding CartCount}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Default" FontAttributes="Bold" />
 
-            <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Total: " VerticalTextAlignment="Center" FontSize="Header" />
-            <Label Grid.Column="2" Grid.Row="1" Text="{Binding TotalAmount, StringFormat='{0:C2}'}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Header" />
+            <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Total: " VerticalTextAlignment="Center" FontSize="Small" />
+            <Label Grid.Column="1" Grid.Row="1" Text="{Binding TotalAmount, StringFormat='{0:C2}'}" VerticalTextAlignment="Center" HorizontalTextAlignment="End"  FontSize="Default" FontAttributes="Bold"/>
 
-            <ImageButton Grid.Column="3" Grid.RowSpan="2" Source="cart_icon.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="80" WidthRequest="80"
+            <ImageButton Grid.Column="2" Grid.RowSpan="2" Source="cart_icon.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="80" WidthRequest="80"
                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SnacksViewModel}}, Path=CheckOutCommand}" />
         </Grid>
 
@@ -39,7 +38,7 @@
         <!-- In a real world scenario, I would extract this as a component and reuse this list could also be templated
         Additionally, this could be extended with gestures to left and right to add to cart and remove to cart and pull down to refresh, from the api... 
         but was overkill for this CA and there's no requirement for an API with updates in real time... -->
-        <CollectionView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding SnacksList}" SelectionMode="Single">
+        <CollectionView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding SnacksList}" SelectionMode="None">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Food" >
@@ -47,8 +46,8 @@
                         <Grid ColumnDefinitions="60,180,40,60" >
                             <Image Grid.Column="0" Source="{Binding Picture}" Aspect="AspectFit" />
                             <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="5">
-                                <Label LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Header" />
-                                <Label LineBreakMode="WordWrap" Text="{Binding Price}" FontSize="Header" />
+                                <Label LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Default" FontAttributes="Bold" />
+                                <Label LineBreakMode="WordWrap" Text="{Binding Price, StringFormat='{0:C2}'}" FontSize="Caption" />
                             </VerticalStackLayout>
                             <HorizontalStackLayout Grid.Column="2">
                                 <Button BackgroundColor="Green" Margin="0,0,0,5"
