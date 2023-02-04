@@ -1,5 +1,6 @@
 ﻿using JewelsCafe.Models;
 using JewelsCafe.Repositories;
+using JewelsCafe.Views;
 using Microsoft.Extensions.Logging;
 using System;
 
@@ -43,16 +44,21 @@ namespace JewelsCafe.Services
 
         internal async Task CheckoutAsync(Order order)
         {
-            await _orderService.PlaceOrderAsync(order);
+            var checkoutResult = await _orderService.PlaceOrderAsync(order);
 
-            _checkoutRepository.Add(new Checkout
+            if (checkoutResult)
             {
-                Id = Guid.NewGuid(),
-                Date = DateTime.Now,
-                Order = order
-            });
+                _checkoutRepository.Add(new Checkout
+                {
+                    Id = Guid.NewGuid(),
+                    Date = DateTime.Now,
+                    Order = order
+                });
 
-            _orderService.Clear();
+                _orderService.Clear();
+
+                await Shell.Current.GoToAsync(nameof(MainPage), true);
+            }
         }
     }
 }

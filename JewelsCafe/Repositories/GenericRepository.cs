@@ -100,6 +100,11 @@ namespace JewelsCafe.Repositories
         {
             throw new NotImplementedException();
         }
+
+        internal int GetQuantity(Guid id)
+        {
+            return _repo.Count(b => b.Id == id);
+        }
     }
 }
 

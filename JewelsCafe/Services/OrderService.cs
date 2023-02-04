@@ -95,19 +95,27 @@ namespace JewelsCafe.Services
             if (null != handler) handler(this, EventArgs.Empty);
         }
 
-        public async Task PlaceOrderAsync (Order order)
+        public async Task<bool> PlaceOrderAsync (Order order)
         {
             var receipt = await _fileService.SaveToFileAsync(order);
 
             if (receipt != null)
             {
                 await Shell.Current.DisplayAlert("Order placed", $"Your order has been placed. Your receipt was saved @ {receipt}", "OK");
+                return true;
             }
+
+            return false;
         }
 
         public void Clear()
         {
             _orderRepository.Clear();
+        }
+
+        public int GetQuantity(Guid id)
+        {
+           return _orderRepository.GetQuantity(id);
         }
     }
 }

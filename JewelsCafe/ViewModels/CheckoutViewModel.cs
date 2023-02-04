@@ -68,12 +68,18 @@ namespace JewelsCafe.ViewModels
                 await Shell.Current.DisplayAlert("Warning", "Please enter your name and email address.", "OK");
                 return;
             }
-
+            
             var order = new Order
             {
                 CustomerName = CustomerName,
                 CustomerPhoneNumber = CustomerPhoneNumber,
-                OrderItems = _orderService.GetAll().Select(food => new OrderItem { Food = food }).ToList()
+                OrderItems = _orderService.GetAll().Distinct().Select(food => 
+                new OrderItem { 
+                    Food = food,
+                    Price = food.Price,
+                    Quantity = _orderService.GetQuantity(food.Id)
+                })
+                .ToList(),
             };
 
             await _checkoutService.CheckoutAsync(order);

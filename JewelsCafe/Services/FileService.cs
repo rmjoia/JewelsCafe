@@ -29,8 +29,8 @@ namespace JewelsCafe.Services
             sb.AppendLine();
             sb.AppendLine();
             sb.AppendLine();
-            sb.AppendLine($"Customer Name: {order.CustomerName}");
-            sb.AppendLine($"Customer Telephone Number: {order.CustomerPhoneNumber}");
+            sb.AppendLine($"Name: {order.CustomerName}");
+            sb.AppendLine($"Telephone Number: {order.CustomerPhoneNumber}");
             sb.AppendLine();
             sb.AppendLine();
             sb.AppendLine();
@@ -42,13 +42,13 @@ namespace JewelsCafe.Services
                 sb.AppendLine();
                 sb.Append($"Item: {item.Food.Name}      ");
                 sb.Append($"Quantity: {item.Quantity}       ");
-                sb.Append($"Price: {item.Price}");
+                sb.AppendLine($"Price uty: {item.Food.Price}      x      Price: {item.Food.Price * item.Quantity}");
             }
 
             sb.AppendLine("________________________________________________________");
             sb.AppendLine("________________________________________________________");
             sb.AppendLine();
-            sb.AppendLine($"Total: {order.OrderItems.Sum(items => items.Price * items.Quantity)}");
+            sb.AppendLine($"Total: {order.OrderItems.Sum(items => items.Food.Price * items.Quantity)}");
 
 
             string folder = "";
@@ -85,7 +85,7 @@ namespace JewelsCafe.Services
                 _logger.LogError("Error", ex.Message);
             }
 
-            return null;
+            return targetFile;
         }
     }
 }
