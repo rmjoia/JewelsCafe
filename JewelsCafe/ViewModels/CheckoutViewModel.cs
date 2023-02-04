@@ -76,7 +76,7 @@ namespace JewelsCafe.ViewModels
                 OrderItems = _orderService.GetAll().Select(food => new OrderItem { Food = food }).ToList()
             };
 
-            _checkoutService.Checkout(order);
+            await _checkoutService.CheckoutAsync(order);
             CustomerName = "";
             CustomerPhoneNumber = "";
             UpdateCart();

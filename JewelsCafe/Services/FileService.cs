@@ -1,6 +1,9 @@
 ﻿using JewelsCafe.Models;
 using Microsoft.Extensions.Logging;
 using System.Text;
+#if WINDOWS
+using Windows.Storage.Pickers;
+#endif
 
 
 namespace JewelsCafe.Services
@@ -18,7 +21,7 @@ namespace JewelsCafe.Services
         {
             var date = DateOnly.FromDateTime(DateTime.Now);
 
-            string targetFileName = $"JewelsCaffe_{date}_{DateTime.Now.Ticks}.txt";
+            string targetFileName = $"JewelsCaffe_{date.ToString("dd_MM_yyyy")}_{DateTime.Now.Ticks}.txt";
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"        Jewels Caffe         ");
@@ -26,19 +29,19 @@ namespace JewelsCafe.Services
             sb.AppendLine();
             sb.AppendLine();
             sb.AppendLine();
-            sb.Append($"Customer Name: {order.CustomerName}");
-            sb.Append($"Customer Telephone Number: {order.CustomerPhoneNumber}");
+            sb.AppendLine($"Customer Name: {order.CustomerName}");
+            sb.AppendLine($"Customer Telephone Number: {order.CustomerPhoneNumber}");
             sb.AppendLine();
             sb.AppendLine();
             sb.AppendLine();
-            sb.Append($"Order Items");
-            sb.Append("________________________________________________________");
+            sb.AppendLine($"Order Items");
+            sb.AppendLine("________________________________________________________");
 
             foreach (var item in order.OrderItems)
             {
                 sb.AppendLine();
-                sb.Append($"Item: {item.Food.Name}");
-                sb.Append($"Quantity: {item.Quantity}");
+                sb.Append($"Item: {item.Food.Name}      ");
+                sb.Append($"Quantity: {item.Quantity}       ");
                 sb.Append($"Price: {item.Price}");
             }
 
@@ -49,24 +52,33 @@ namespace JewelsCafe.Services
 
 
             string folder = "";
-            
+
 #if WINDOWS
 
+            var folderPicker = new FolderPicker();
 
+            folderPicker.FileTypeFilter.Add("*");
+
+            var hwnd = ((MauiWinUIWindow)Application.Current.Windows[0].Handler.PlatformView).WindowHandle;
+
+            WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
+
+            var path = await folderPicker.PickSingleFolderAsync();
+
+            folder = path.Path;
 #else
             folder = FileSystem.Current.AppDataDirectory;
 #endif
-            
+
             string targetFile = System.IO.Path.Combine(folder, targetFileName);
 
             try
             {
-                using FileStream outputStream = System.IO.File.OpenWrite(targetFile);
-                using StreamWriter streamWriter = new StreamWriter(outputStream);
 
-                await streamWriter.WriteAsync(sb);
+                using FileStream outputStream = File.OpenWrite(targetFile);
+                using StreamWriter streamWriter = new(outputStream);
 
-                return targetFile;
+                await streamWriter.WriteAsync(sb.ToString());
             }
             catch (Exception ex)
             {

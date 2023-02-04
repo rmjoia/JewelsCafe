@@ -41,9 +41,9 @@ namespace JewelsCafe.Services
             return shoppingCart;
         }
 
-        internal void Checkout(Order order)
+        internal async Task CheckoutAsync(Order order)
         {
-            _orderService.PlaceOrder(order);
+            await _orderService.PlaceOrderAsync(order);
 
             _checkoutRepository.Add(new Checkout
             {

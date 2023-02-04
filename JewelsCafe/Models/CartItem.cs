@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JewelsCafe.Models
 {
-    internal class CartItem
+    public class CartItem
     {
         public string Name { get; set; }
     
