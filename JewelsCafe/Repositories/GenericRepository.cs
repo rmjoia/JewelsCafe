@@ -15,7 +15,7 @@ namespace JewelsCafe.Repositories
             _repo = new();
             _logger = logger;
         }
-
+        
         public IFood Add(IFood item)
         {
             try
@@ -25,7 +25,7 @@ namespace JewelsCafe.Repositories
             catch (Exception ex)
             {
                 _logger.LogError(error, "Adding", ex.Message);
-
+                
                 throw;
             }
 
@@ -94,11 +94,6 @@ namespace JewelsCafe.Repositories
         public IFood Update(IFood item)
         {
             throw new NotImplementedException();
-        }
-
-        public void Clear()
-        {
-            _repo.Clear();
         }
     }
 }

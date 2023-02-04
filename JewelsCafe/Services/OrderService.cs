@@ -12,7 +12,6 @@ namespace JewelsCafe.Services
         private readonly GenericRepository<IFood> _orderRepository;
         private readonly GenericRepository<Beverage> _beverageRepository;
         private readonly GenericRepository<Food> _foodRepository;
-        private readonly FileService _fileService;
         private readonly string error = "An exception ocurred while {0}: {1}";
 
         public event EventHandler OrderChanged;
@@ -21,15 +20,13 @@ namespace JewelsCafe.Services
             ILogger<OrderService> logger, 
             GenericRepository<IFood> orderRepository, 
             GenericRepository<Beverage> beverageRepository,
-            GenericRepository<Food> foodRepository,
-            FileService fileService
+            GenericRepository<Food> foodRepository
             )
         {
             _logger = logger;
             _orderRepository = orderRepository;
             _beverageRepository = beverageRepository;
             _foodRepository = foodRepository;
-            _fileService = fileService;
 
         }
 
@@ -96,15 +93,5 @@ namespace JewelsCafe.Services
             if(null != handler) handler(this, EventArgs.Empty);
         }
 
-        internal void PlaceOrder(Order order)
-        {
-            var receipt = _fileService.SaveToFileAsync(order);
-            Shell.Current.DisplayAlert("Order placed", $"Your order has been placed. Your receipt was saved @ {receipt}", "OK");
-        }
-
-        internal void Clear()
-        {
-            _orderRepository.Clear();
-        }
     }
 }

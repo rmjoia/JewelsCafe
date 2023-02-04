@@ -95,20 +95,20 @@
             </Border>
 
             <VerticalStackLayout Grid.Row="1" Padding="5">
-                <Label Text="Enter your name" FontAttributes="Bold"/>
+                <Label Text="{Binding CustomerName}" FontAttributes="Bold"/>
                 <Entry
                   MaxLength="255"
-                  Text="{Binding CustomerName}" Placeholder="Enter your name" />
+                  Text="name" Placeholder="Enter your name" />
             </VerticalStackLayout>
 
             <VerticalStackLayout Grid.Row="2" Padding="5">
-                <Label Text="Enter your Telephone Number" FontAttributes="Bold"/>
+                <Label Text="{Binding CustomerEmail}" FontAttributes="Bold"/>
                 <Entry
                   MaxLength="255"
-                  Text="{Binding CustomerPhoneNumber}" Placeholder="Enter your Telephone Number" />
+                  Text="email" Placeholder="Enter your email" />
             </VerticalStackLayout>
 
-            <Button Grid.Row="3" Text="Place Order" Margin="5" Command="{Binding PlaceOrderCommand}" />
+            <Button Grid.Row="3" Text="Place Order" Margin="5" />
             
         </Grid>
 
