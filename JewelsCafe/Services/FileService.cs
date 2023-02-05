@@ -53,6 +53,7 @@ namespace JewelsCafe.Services
 
             string folder = "";
 
+            //  Credits to the filepicker code to https://blog.verslu.is/maui/folder-picker-with-dotnet-maui/
 #if WINDOWS
 
             var folderPicker = new FolderPicker();

@@ -6,10 +6,61 @@
              xmlns:viewmodel="clr-namespace:JewelsCafe.ViewModels"
              x:DataType="viewmodel:AdminViewModel"
              Title="{Binding Title}">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="50,*,50,100" >
+
+        <!-- Sales for the day -->
+
+        <Label Grid.Row="0" Text="Sales Report" Padding="10,0" FontSize="Medium" />
+
+        <CollectionView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding DaySalesList}" SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Checkout" >
+                    <Frame HeightRequest="80" Padding="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="250" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="80" />
+                            </Grid.ColumnDefinitions>
+                           
+                            <Grid ColumnDefinitions="180,120,200" Grid.Column="0" Padding="5" Grid.ColumnSpan="2" RowDefinitions="Auto,Auto" VerticalOptions="Center" >
+
+                                <Label Grid.Column="0" Grid.Row="0" LineBreakMode="WordWrap" Text="Id" FontSize="Default" HorizontalOptions="Start" FontAttributes="Bold" />
+                                <Label Grid.Column="1"  Grid.Row="0" LineBreakMode="WordWrap" Text="Order Qty." FontSize="Default" FontAttributes="Bold" />
+                                <Label Grid.Column="2" Grid.Row="0" LineBreakMode="WordWrap" Text="Date/Time" FontSize="Default" FontAttributes="Bold" />
+
+                                <Label Grid.Column="0" Grid.Row="1" Text="{Binding Id}" LineBreakMode="TailTruncation" HorizontalOptions="Start" FontSize="Caption" />
+                                <Label Grid.Column="1"  Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Order.OrderItems.Count}" HorizontalOptions="Center" FontSize="Caption" />
+                                <Label Grid.Column="2" Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Date}" FontSize="Caption" />
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+
+
+        <Label Grid.Row="2" Text="Credits" Padding="10,0" FontSize="Medium" />
+
+        <Border Grid.Row="3" Grid.ColumnSpan="2" StrokeThickness="1" Stroke="Gray" Padding="5" Margin="5" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Grid.Row="0" Grid.Column="0" Margin="5" >
+
+                <Label Grid.Row="0" Grid.Column="0" Padding="20,0" FontAttributes="Bold"
+                        Text="Ricardo Melo Joia, L00177608, ATU, 2023" 
+                        HorizontalTextAlignment="Start" />
+
+                <Label Grid.Row="0" Grid.Column="0" Padding="20,0"
+                        Text="credits to the images downloaded from freepik.com and google.com" 
+                        HorizontalTextAlignment="Start" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
 </ContentPage>

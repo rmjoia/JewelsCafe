@@ -1,10 +1,19 @@
 ﻿using JewelsCafe.Models;
 using JewelsCafe.Repositories;
 
+#if WINDOWS
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
+using Windows.Graphics;
+#endif
+
 namespace JewelsCafe;
 
 public partial class App : Application
 {
+    const int WindowWidth = 520;
+    const int WindowHeight = 900;
+
     private readonly GenericRepository<Beverage> _beveragesRepository;
     private readonly GenericRepository<Food> _foodsRepository;
 
@@ -18,6 +27,29 @@ public partial class App : Application
         _foodsRepository = foodsRepository;
 
         SeedData();
+
+#if WINDOWS
+        SetWindowSize();
+#endif
+    }
+
+    /// <summary>
+    /// Credits to this code to https://stackoverflow.com/a/72400003
+    /// </summary>
+    private void SetWindowSize()
+    {
+#if WINDOWS
+        Microsoft.Maui.Handlers.WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>
+        {
+            var mauiWindow = handler.VirtualView;
+            var nativeWindow = handler.PlatformView;
+            nativeWindow.Activate();
+            IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
+            WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
+            AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
+            appWindow.Resize(new SizeInt32(WindowWidth, WindowHeight));
+        });
+#endif
     }
 
     private void SeedData()

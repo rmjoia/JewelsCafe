@@ -14,6 +14,9 @@ namespace JewelsCafe.Services
         private readonly CheckoutRepository _checkoutRepository;
         private IEnumerable<CartItem> shoppingCart;
 
+
+        public event EventHandler Checkout;
+
         public CheckoutService(
             ILogger<CheckoutService> logger,
             GenericRepository<IFood> orderRepository,
@@ -56,9 +59,19 @@ namespace JewelsCafe.Services
                 });
 
                 _orderService.Clear();
-
-                await Shell.Current.GoToAsync(nameof(MainPage), true);
+                OnCheckoutDone();
             }
+        }
+
+        public void OnCheckoutDone()
+        {
+            EventHandler handler = Checkout;
+            if (null != handler) handler(this, EventArgs.Empty);
+        }
+
+        public IEnumerable<Checkout> GetAll()
+        {
+            return _checkoutRepository.GetAll();
         }
     }
 }
