@@ -25,7 +25,7 @@
                                 <ColumnDefinition Width="80" />
                             </Grid.ColumnDefinitions>
                            
-                            <Grid ColumnDefinitions="180,120,200" Grid.Column="0" Padding="5" Grid.ColumnSpan="2" RowDefinitions="Auto,Auto" VerticalOptions="Center" >
+                            <Grid ColumnDefinitions="150,120,100" Grid.Column="0" Padding="5" Grid.ColumnSpan="2" RowDefinitions="Auto,Auto" VerticalOptions="Center" >
 
                                 <Label Grid.Column="0" Grid.Row="0" LineBreakMode="WordWrap" Text="Id" FontSize="Default" HorizontalOptions="Start" FontAttributes="Bold" />
                                 <Label Grid.Column="1"  Grid.Row="0" LineBreakMode="WordWrap" Text="Order Qty." FontSize="Default" FontAttributes="Bold" />
@@ -33,7 +33,7 @@
 
                                 <Label Grid.Column="0" Grid.Row="1" Text="{Binding Id}" LineBreakMode="TailTruncation" HorizontalOptions="Start" FontSize="Caption" />
                                 <Label Grid.Column="1"  Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Order.OrderItems.Count}" HorizontalOptions="Center" FontSize="Caption" />
-                                <Label Grid.Column="2" Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Date}" FontSize="Caption" />
+                                <Label Grid.Column="2" Grid.Row="1" LineBreakMode="WordWrap" Text="{Binding Date}" FontSize="Caption" HorizontalOptions="Center" />
                             </Grid>
                         </Grid>
                     </Frame>
